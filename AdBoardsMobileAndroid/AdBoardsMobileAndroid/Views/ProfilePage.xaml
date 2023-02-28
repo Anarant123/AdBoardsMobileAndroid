@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AdBoardsMobileAndroid.Views.ProfilePage"
+             Title="Мой профиль">
+    <ContentPage.Resources>
+        <Style TargetType="Image" x:Key="img">
+            <Setter Property="WidthRequest" Value="20"/>
+            <Setter Property="HeightRequest" Value="20"/>
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="22"/>
+        </Style>
+
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical"
+                     Margin="20"
+                     Spacing="10">
+            <Image Source="icon_image_person.png"
+                   WidthRequest="400"
+                   HeightRequest="400"/>
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Владимир"/>
+                <Label Text="99 Лет"/>
+            </StackLayout>
+            
+            <StackLayout Orientation="Horizontal">
+                <Image Source="icon_phone.png"
+                       Style="{StaticResource img}"/>
+                <Label Text="+79373669868"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Image Source="icon_mail.png"
+                       Style="{StaticResource img}"/>
+                <Label Text="misha.safronov.02.12@mail.ru"/>
+            </StackLayout>
+            
+            <StackLayout Orientation="Horizontal">
+                <Image Source="icon_map_location.png"
+                       Style="{StaticResource img}"/>
+                <Label Text="Казань"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
