@@ -16,5 +16,10 @@ namespace AdBoardsMobileAndroid.Views
 		{
 			InitializeComponent ();
 		}
-	}
+
+        async private void tbiEditProfile_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(EditingProfilePage));
+        }
+    }
 }

@@ -1,12 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AdBoardsMobileAndroid.Views.EditingProfilePage">
+             x:Class="AdBoardsMobileAndroid.Views.EditingProfilePage"
+             Title="Редактировать профиль">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout Orientation="Vertical"
+                         Margin="20,10,20,10"
+                         Spacing="10">
+                <Image Source="icon_image_person.png"
+                       x:Name="imgProfile"
+                       WidthRequest="350"
+                       HeightRequest="350"/>
+                <Button x:Name="btnGetPhoto" Text="Выбрать фото"
+                        FontSize="16"
+                        Clicked="btnGetPhoto_Clicked"
+                        HorizontalOptions="CenterAndExpand"/>
+                <Entry x:Name="tbNickName" Placeholder="Никнейм..." 
+                       FontSize="Title"/>
+                <Entry x:Name="tbPhone" Placeholder="Номер телефона..." 
+                       FontSize="Title"/>
+                <Entry x:Name="tbEmail" Placeholder="Электронная почта..." 
+                       FontSize="Title"/>
+                <Label Text="Дата рождения:" FontSize="Title"/>
+                <DatePicker x:Name="dpBirthday"
+                            Format="D"        
+                            FontSize="Title"
+                            MaximumDate="01/01/2010"
+                            MinimumDate="01/01/1940"/>
+                <Entry x:Name="tbСity" Placeholder="Город..." 
+                       FontSize="Title"/>
+                <Button x:Name="btnSaveChanges" Text="Сохранить изменения"
+                        FontSize="16"
+                        Clicked="btnSaveChanges_Clicked"
+                        HorizontalOptions="CenterAndExpand"
+                        Margin="0,0,0,10"/>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

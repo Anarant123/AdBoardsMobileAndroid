@@ -15,36 +15,45 @@
 
     </ContentPage.Resources>
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="tbiEditProfile" 
+                     IconImageSource="icon_edit.png" 
+                     Clicked="tbiEditProfile_Clicked"/>
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical"
-                     Margin="20"
-                     Spacing="10">
-            <Image Source="icon_image_person.png"
-                   WidthRequest="400"
-                   HeightRequest="400"/>
+        <ScrollView>
+            <StackLayout Orientation="Vertical"
+                         Margin="20,10,20,10"
+                         Spacing="10">
+                <Image Source="icon_image_person.png"
+                       x:Name="imgProfile"
+                       WidthRequest="350"
+                       HeightRequest="350"/>
 
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Владимир"/>
-                <Label Text="99 Лет"/>
-            </StackLayout>
-            
-            <StackLayout Orientation="Horizontal">
-                <Image Source="icon_phone.png"
-                       Style="{StaticResource img}"/>
-                <Label Text="+79373669868"/>
-            </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Владимир"/>
+                    <Label Text="99 Лет"/>
+                </StackLayout>
 
-            <StackLayout Orientation="Horizontal">
-                <Image Source="icon_mail.png"
-                       Style="{StaticResource img}"/>
-                <Label Text="misha.safronov.02.12@mail.ru"/>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="icon_phone.png"
+                           Style="{StaticResource img}"/>
+                    <Label Text="+79373669868"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="icon_mail.png"
+                           Style="{StaticResource img}"/>
+                    <Label Text="misha.safronov.02.12@mail.ru"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="icon_map_location.png"
+                           Style="{StaticResource img}"/>
+                    <Label Text="Казань"/>
+                </StackLayout>
             </StackLayout>
-            
-            <StackLayout Orientation="Horizontal">
-                <Image Source="icon_map_location.png"
-                       Style="{StaticResource img}"/>
-                <Label Text="Казань"/>
-            </StackLayout>
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

@@ -1,12 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AdBoardsMobileAndroid.Views.AddAdPage">
+             x:Class="AdBoardsMobileAndroid.Views.AddAdPage"
+             Title="Добавить объявление">
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout Orientation="Vertical"
+                         Margin="20,10,20,10"
+                         Spacing="10">
+                <Image Source="icon_image.png"
+                       WidthRequest="350"
+                       HeightRequest="350"/>
+                <Button x:Name="btnGetPhoto" Text="Выбрать фото"
+                        FontSize="16"
+                        Clicked="btnGetPhoto_Clicked"
+                        HorizontalOptions="CenterAndExpand"/>
+                
+                
+                <Entry x:Name="tbAdName" Placeholder="Название..." 
+                       FontSize="Title"/>
+                <Editor x:Name="tbDescription" Placeholder="Описание..." 
+                       FontSize="Title"/>
+                <Entry x:Name="tbPrice" Placeholder="Цена..." 
+                       FontSize="Title"/>
+
+                <RadioButton x:Name="rbSell" Content="Продам" IsChecked="True"/>
+                <RadioButton x:Name="rbBuy" Content="Куплю"/>
+
+                <Entry x:Name="tbСity" Placeholder="Город..." 
+                       FontSize="Title"/>
+                <Picker x:Name="pickerCategory" FontSize="Title">
+                    <Picker.Items>
+                        <x:String>Недвижимость</x:String>
+                        <x:String>Транспорт</x:String>
+                        <x:String>Услуги</x:String>
+                        <x:String>Личные вещи</x:String>
+                        <x:String>Инструменты</x:String>
+                        <x:String>Электроника</x:String>
+                    </Picker.Items>
+                </Picker>
+                
+                <Button x:Name="btnCreateAd" Text="Опубликовать"
+                        FontSize="16"
+                        Clicked="btnCreateAd_Clicked"
+                        HorizontalOptions="CenterAndExpand"
+                        Margin="0,0,0,10"/>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

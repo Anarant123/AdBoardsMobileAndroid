@@ -1,12 +1,68 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AdBoardsMobileAndroid.Views.AdPage">
+             x:Class="AdBoardsMobileAndroid.Views.AdPage"
+             Title="Объявление">
+
+    <ContentPage.Resources>
+        <Style TargetType="Image" x:Key="img">
+            <Setter Property="WidthRequest" Value="20"/>
+            <Setter Property="HeightRequest" Value="20"/>
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="22"/>
+        </Style>
+
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="btnChooseAction" Text="⋮" Clicked="btnChooseAction_Clicked"/>
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout Orientation="Vertical"
+                         Margin="20,10,20,10"
+                         Spacing="10">
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="icon_image_person.png"
+                           Style="{StaticResource img}"
+                           WidthRequest="50"
+                           HeightRequest="50"/>
+                    <Label x:Name="lbSalesman"
+                           Text="Продавец"/>
+                </StackLayout>
+                
+                <Image Source="icon_image.png"
+                       x:Name="imgProfile"
+                       WidthRequest="350"
+                       HeightRequest="350"/>
+
+                <Label x:Name="lbName" Text="Название"/>
+                <Label x:Name="lbDescription" Text="Описание"/>
+
+
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="icon_phone.png"
+                           Style="{StaticResource img}"/>
+                    <Label x:Name="lbPhone"
+                           Text="Телефон"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="icon_price.png"
+                           Style="{StaticResource img}"/>
+                    <Label x:Name="lbPrice"
+                           Text="Цена"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="icon_map_location.png"
+                           Style="{StaticResource img}"/>
+                    <Label x:Name="lbCity" Text="Город"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

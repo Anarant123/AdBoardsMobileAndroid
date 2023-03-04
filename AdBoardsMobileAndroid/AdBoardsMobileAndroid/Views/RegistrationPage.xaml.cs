@@ -16,5 +16,10 @@ namespace AdBoardsMobileAndroid.Views
         {
             InitializeComponent();
         }
+
+        private void btnRegistration_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PopAsync();
+        }
     }
 }

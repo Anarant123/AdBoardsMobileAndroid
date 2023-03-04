@@ -15,6 +15,19 @@ namespace AdBoardsMobileAndroid.Views
 		public AddAdPage ()
 		{
 			InitializeComponent ();
-		}
-	}
+            
+			pickerCategory.SelectedIndex = 0;
+
+        }
+
+        private void btnGetPhoto_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        async private void btnCreateAd_Clicked(object sender, EventArgs e)
+        {
+            
+        }
+    }
 }

@@ -13,6 +13,7 @@ namespace AdBoardsMobileAndroid
 
             Routing.RegisterRoute(nameof(EditingProfilePage),typeof(EditingProfilePage));
             Routing.RegisterRoute(nameof(AdPage),typeof(AdPage));
+            Routing.RegisterRoute(nameof(MyAdsPage), typeof(MyAdsPage));
         }
 
     }

@@ -16,5 +16,15 @@ namespace AdBoardsMobileAndroid.Views
         {
             InitializeComponent();
         }
+
+        async private void btnSaveChanges_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("..");
+        }
+
+        private void btnGetPhoto_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }

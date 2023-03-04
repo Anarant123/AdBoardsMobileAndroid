@@ -16,5 +16,10 @@ namespace AdBoardsMobileAndroid.Views
         {
             InitializeComponent();
         }
+
+        private void btnChooseAction_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }
