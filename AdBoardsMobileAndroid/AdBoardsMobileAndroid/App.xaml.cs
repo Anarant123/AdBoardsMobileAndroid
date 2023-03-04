@@ -13,7 +13,7 @@ namespace AdBoardsMobileAndroid
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            MainPage = new NavigationPage(new AuthorizationPage());
         }
 
         protected override void OnStart()

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AdBoardsMobileAndroid.Views.AuthorizationPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Margin="20,10,20,10">
+                <Label Text="Регистрация" HorizontalOptions="CenterAndExpand"/>
+                <Entry x:Name="tbLogin" Placeholder="Логин..." 
+                       FontSize="Title"/>
+                <Entry x:Name="tbPassword" Placeholder="Пароль..." 
+                       FontSize="Title" IsPassword="True"/>
+                <Button x:Name="btnSignIn" Text="Войти"
+                        Margin="0,20,0,0"
+                        Clicked="btnSignIn_Clicked"/>
+                <Grid HorizontalOptions="CenterAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="btnSignUp" Text="Зарегестрироваться"
+                            Margin="0,20,0,0"
+                            FontSize="12"
+                            Clicked="btnSignUp_Clicked"
+                            Grid.Column="0"
+                            WidthRequest="200"/>
+                    <Button x:Name="btnRecoverPass" Text="Забыл пароль"
+                            Margin="0,20,0,0"
+                            FontSize="12"
+                            Clicked="btnRecoverPass_Clicked"
+                            Grid.Column="1"
+                            WidthRequest="200"/>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

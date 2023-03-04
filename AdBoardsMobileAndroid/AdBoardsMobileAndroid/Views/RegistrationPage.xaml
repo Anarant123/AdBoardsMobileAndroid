@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AdBoardsMobileAndroid.Views.RegistrationPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Margin="20,10,20,10">
+                <Label Text="Регистрация" HorizontalOptions="CenterAndExpand"/>
+                <Entry x:Name="tbLogin" Placeholder="Логин..." 
+                       FontSize="Title"/>
+                <Label Text="Дата рождения:" FontSize="Title"/>
+                <DatePicker x:Name="dpBirthday"
+                            Format="D"        
+                            FontSize="Title"
+                            MaximumDate="01/01/2010"
+                            MinimumDate="01/01/1940"/>
+                <Entry x:Name="tbPhone" Placeholder="Телефон..." 
+                       FontSize="Title" 
+                       Keyboard="Telephone"/>
+                <Entry x:Name="tbEmail" Placeholder="Электронная почта..." 
+                       FontSize="Title" 
+                       Keyboard="Email"/>
+                <Entry x:Name="tbPassword1" Placeholder="Пароль..." 
+                       FontSize="Title" IsPassword="True"/>
+                <Entry x:Name="tbPassword2" Placeholder="Повтор пароля..." 
+                       FontSize="Title" IsPassword="True"/>
+                <Button x:Name="btnRegistration" Text="Зарегистрироваться"
+                        Margin="0,20,0,0"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
