@@ -24,11 +24,11 @@
     </Shell.Resources>
 
     <TabBar>
-        <ShellContent Route="ProfilePage" Icon="icon_loop.png" ContentTemplate="{DataTemplate views:AdsPage}" />
-        <ShellContent Icon="icon_my_ads.png" ContentTemplate="{DataTemplate views:MyAdsPage}" />
-        <ShellContent Icon="icon_plus.png" ContentTemplate="{DataTemplate views:AddAdPage}" />
-        <ShellContent Icon="icon_favorites.png" ContentTemplate="{DataTemplate views:FavoritesAdsPage}" />
-        <ShellContent Icon="icon_person.png" ContentTemplate="{DataTemplate views:ProfilePage}" />
+        <ShellContent Content="Поиск" Route="ProfilePage" Icon="icon_loop.png" ContentTemplate="{DataTemplate views:AdsPage}" />
+        <ShellContent Content="Мои объявления" Icon="icon_my_ads.png" ContentTemplate="{DataTemplate views:MyAdsPage}" />
+        <ShellContent Content="Добавить объявление" Icon="icon_plus.png" ContentTemplate="{DataTemplate views:AddAdPage}" />
+        <ShellContent Content="Избранное" Icon="icon_favorites.png" ContentTemplate="{DataTemplate views:FavoritesAdsPage}" />
+        <ShellContent Content="Профиль" Icon="icon_person.png" ContentTemplate="{DataTemplate views:ProfilePage}" />
     </TabBar>
 
 
