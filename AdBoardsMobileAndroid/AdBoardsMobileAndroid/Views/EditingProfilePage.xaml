@@ -16,20 +16,15 @@
                         FontSize="16"
                         Clicked="btnGetPhoto_Clicked"
                         HorizontalOptions="CenterAndExpand"/>
-                <Entry x:Name="tbNickName" Placeholder="Никнейм..." 
-                       FontSize="Title"/>
-                <Entry x:Name="tbPhone" Placeholder="Номер телефона..." 
-                       FontSize="Title"/>
-                <Entry x:Name="tbEmail" Placeholder="Электронная почта..." 
-                       FontSize="Title"/>
-                <Label Text="Дата рождения:" FontSize="Title"/>
+                <Entry x:Name="tbName" Placeholder="Никнейм..." />
+                <Entry x:Name="tbPhone" Placeholder="Номер телефона..." />
+                <Entry x:Name="tbEmail" Placeholder="Электронная почта..." />
+                <Label Text="Дата рождения:" />
                 <DatePicker x:Name="dpBirthday"
                             Format="D"        
-                            FontSize="Title"
                             MaximumDate="01/01/2010"
                             MinimumDate="01/01/1940"/>
-                <Entry x:Name="tbСity" Placeholder="Город..." 
-                       FontSize="Title"/>
+                <Entry x:Name="tbCity" Placeholder="Город..." />
                 <Button x:Name="btnSaveChanges" Text="Сохранить изменения"
                         FontSize="16"
                         Clicked="btnSaveChanges_Clicked"

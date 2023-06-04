@@ -1,6 +1,8 @@
-﻿using System;
+﻿using AdBoardsMobileAndroid.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,14 +19,13 @@ namespace AdBoardsMobileAndroid.Views
             InitializeComponent();
         }
 
-        private void btnRecoverPass_Clicked(object sender, EventArgs e)
+        private async void btnSend_Clicked(object sender, EventArgs e)
         {
-            Navigation.PopAsync();
-        }
+            var httpClient = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Post, $"http://{IPv4.ip}:5228/People/RecoveryPassword?Login={tbEmail.Text}");
+            var response = await httpClient.SendAsync(request);
 
-        private void btnSend_Clicked(object sender, EventArgs e)
-        {
-
+            await Navigation.PopAsync();
         }
     }
 }

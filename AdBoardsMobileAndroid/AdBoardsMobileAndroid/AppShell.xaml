@@ -13,7 +13,7 @@
                 <Setter Property="Shell.TitleColor" Value="White" />
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
                 <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
-                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="#333333" />
                 <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
                 <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
                 <Setter Property="Shell.TabBarTitleColor" Value="White"/>
@@ -23,12 +23,22 @@
         </ResourceDictionary>
     </Shell.Resources>
 
-    <TabBar>
-        <ShellContent Content="Поиск" Route="ProfilePage" Icon="icon_loop.png" ContentTemplate="{DataTemplate views:AdsPage}" />
-        <ShellContent Content="Мои объявления" Icon="icon_my_ads.png" ContentTemplate="{DataTemplate views:MyAdsPage}" />
-        <ShellContent Content="Добавить объявление" Icon="icon_plus.png" ContentTemplate="{DataTemplate views:AddAdPage}" />
-        <ShellContent Content="Избранное" Icon="icon_favorites.png" ContentTemplate="{DataTemplate views:FavoritesAdsPage}" />
-        <ShellContent Content="Профиль" Icon="icon_person.png" ContentTemplate="{DataTemplate views:ProfilePage}" />
+    <TabBar x:Name="tabBar" >
+        <Tab Title="Поиск" Icon="icon_loop.png" x:Name="tab1">
+            <ShellContent ContentTemplate="{DataTemplate views:AdsPage}" />
+        </Tab>
+        <Tab Title="Мои" Icon="icon_my_ads.png">
+            <ShellContent ContentTemplate="{DataTemplate views:MyAdsPage}" />
+        </Tab>
+        <Tab Title="Добавить" Icon="icon_plus.png">
+            <ShellContent ContentTemplate="{DataTemplate views:AddAdPage}" />
+        </Tab>
+        <Tab Title="Избранное" Icon="icon_favorites.png">
+            <ShellContent ContentTemplate="{DataTemplate views:FavoritesAdsPage}" />
+        </Tab>
+        <Tab Title="Профиль" Icon="icon_person.png">
+            <ShellContent ContentTemplate="{DataTemplate views:ProfilePage}" />
+        </Tab>
     </TabBar>
 
 

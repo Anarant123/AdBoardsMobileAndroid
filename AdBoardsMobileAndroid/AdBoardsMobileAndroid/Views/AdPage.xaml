@@ -10,16 +10,8 @@
             <Setter Property="HeightRequest" Value="20"/>
         </Style>
 
-        <Style TargetType="Label">
-            <Setter Property="FontSize" Value="22"/>
-        </Style>
-
     </ContentPage.Resources>
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="btnChooseAction" Text="⋮" Clicked="btnChooseAction_Clicked"/>
-    </ContentPage.ToolbarItems>
-    
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Orientation="Vertical"
@@ -27,19 +19,21 @@
                          Spacing="10">
                 <StackLayout Orientation="Horizontal">
                     <Image Source="icon_image_person.png"
+                           x:Name="imgPerson"
                            Style="{StaticResource img}"
                            WidthRequest="50"
                            HeightRequest="50"/>
                     <Label x:Name="lbSalesman"
-                           Text="Продавец"/>
+                           Text="Продавец"
+                           VerticalOptions="Center"/>
                 </StackLayout>
                 
                 <Image Source="icon_image.png"
-                       x:Name="imgProfile"
+                       x:Name="imgAd"
                        WidthRequest="350"
                        HeightRequest="350"/>
 
-                <Label x:Name="lbName" Text="Название"/>
+                <Label x:Name="lbName" Text="Название" FontAttributes="Bold"/>
                 <Label x:Name="lbDescription" Text="Описание"/>
 
 
@@ -62,6 +56,17 @@
                            Style="{StaticResource img}"/>
                     <Label x:Name="lbCity" Text="Город"/>
                 </StackLayout>
+
+                <Button x:Name="btnAddToFavorites" Text="Добавить в избранное"
+                        Clicked="btnAddToFavorites_Clicked"
+                        HorizontalOptions="CenterAndExpand"
+                        WidthRequest="250"
+                        Margin="0,0,0,5"/>
+                <Button x:Name="btnComplaint" Text="Пожаловаться"
+                        Clicked="btnComplaint_Clicked"
+                        HorizontalOptions="CenterAndExpand"
+                        WidthRequest="250"
+                        Margin="0,0,0,10"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

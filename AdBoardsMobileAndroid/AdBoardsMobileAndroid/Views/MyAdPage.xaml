@@ -1,9 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AdBoardsMobileAndroid.Views.AddAdPage"
-             Title="Добавить объявление">
-    
+             x:Class="AdBoardsMobileAndroid.Views.MyAdPage">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Orientation="Vertical"
@@ -15,9 +13,10 @@
                        HeightRequest="350"/>
                 <Button x:Name="btnGetPhoto" Text="Выбрать фото"
                         Clicked="btnGetPhoto_Clicked"
-                        HorizontalOptions="CenterAndExpand"/>
-                
-                
+                        HorizontalOptions="CenterAndExpand"
+                        WidthRequest="220"/>
+
+
                 <Entry x:Name="tbName" Placeholder="Название..." />
                 <Editor x:Name="tbDescription" Placeholder="Описание..." 
                         AutoSize="TextChanges"
@@ -39,7 +38,7 @@
                 </Grid>
 
                 <Entry x:Name="tbCity" Placeholder="Город..."/>
-                <Picker x:Name="pickerCategory" >
+                <Picker x:Name="pickerCategory">
                     <Picker.Items>
                         <x:String>Недвижимость</x:String>
                         <x:String>Транспорт</x:String>
@@ -48,11 +47,17 @@
                         <x:String>Электроника</x:String>
                     </Picker.Items>
                 </Picker>
-                
-                <Button x:Name="btnCreateAd" Text="Опубликовать"
-                        Clicked="btnCreateAd_Clicked"
+
+                <Button x:Name="btnSaveChanges" Text="Сохранить изменения"
+                        Clicked="btnSaveChanges_Clicked"
                         HorizontalOptions="CenterAndExpand"
-                        Margin="0,0,0,10"/>
+                        Margin="0,0,0,5"
+                        WidthRequest="220"/>
+                <Button x:Name="btnDropAd" Text="Опубликовать"
+                        Clicked="btnDropAd_Clicked"
+                        HorizontalOptions="CenterAndExpand"
+                        Margin="0,0,0,10"
+                        WidthRequest="220"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

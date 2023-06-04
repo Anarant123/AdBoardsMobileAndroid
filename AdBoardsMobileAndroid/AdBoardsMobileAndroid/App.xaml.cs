@@ -13,6 +13,7 @@ namespace AdBoardsMobileAndroid
         {
             InitializeComponent();
 
+            //MainPage = new AppShell();
             MainPage = new NavigationPage(new AuthorizationPage());
         }
 
