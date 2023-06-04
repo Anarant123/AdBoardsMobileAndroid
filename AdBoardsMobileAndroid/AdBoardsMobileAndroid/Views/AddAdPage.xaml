@@ -26,20 +26,18 @@
                 <Entry x:Name="tbPrice" Placeholder="Цена..." 
                        Keyboard="Numeric"/>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
+                <StackLayout Orientation="Horizontal"
+                             Padding="20,0,20,0">
                     <RadioButton x:Name="rbSell" Content="Продам"
                                  Grid.Column="0"
                                  IsChecked="True"/>
                     <RadioButton x:Name="rbBuy" Content="Куплю"
-                                 Grid.Column="1"/>
-                </Grid>
+                                 Grid.Column="1"
+                                         HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
 
                 <Entry x:Name="tbCity" Placeholder="Город..."/>
-                <Picker x:Name="pickerCategory" >
+                <Picker x:Name="pickerCategory">
                     <Picker.Items>
                         <x:String>Недвижимость</x:String>
                         <x:String>Транспорт</x:String>
