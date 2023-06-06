@@ -1,18 +1,12 @@
 ﻿using AdBoardsMobileAndroid.Models.db;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace AdBoardsMobileAndroid.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ProfilePage : ContentPage
 	{
 		public ProfilePage ()
@@ -23,21 +17,22 @@ namespace AdBoardsMobileAndroid.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            var person = Context.UserNow.Person;
 
-            //imgProfile.Source = Context.UserNow.Img;
-
-            //lblName.Text = Context.UserNow.Name;
-            //lblCity.Text = Context.UserNow.City;
-            //lblEmail.Text = Context.UserNow.Email;
-            //lblPhone.Text = Context.UserNow.Phone;
+            imgProfile.Source = person.PhotoName;
+            lblName.Text = person.Name;
+            lblCity.Text = person.City;
+            lblEmail.Text = person.Email;
+            lblPhone.Text = person.Phone;
+            lblPhone.Text = person.Birthday.ToString().Substring(0, 10);
         }
 
-        async private void tbiEditProfile_Clicked(object sender, EventArgs e)
+        async private void TbiEditProfile_Clicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync(nameof(EditingProfilePage));
         }
 
-        private void btnExit_Clicked(object sender, EventArgs e)
+        private void BtnExit_Clicked(object sender, EventArgs e)
         {
             Context.UserNow = null;
             Preferences.Clear();

@@ -12,7 +12,7 @@
                        x:Name="imgAd"
                        HeightRequest="350"/>
                 <Button x:Name="btnGetPhoto" Text="Выбрать фото"
-                        Clicked="btnGetPhoto_Clicked"
+                        Clicked="BtnGetPhoto_Clicked"
                         HorizontalOptions="CenterAndExpand"
                         WidthRequest="220"/>
 
@@ -49,12 +49,12 @@
                 </Picker>
 
                 <Button x:Name="btnSaveChanges" Text="Сохранить изменения"
-                        Clicked="btnSaveChanges_Clicked"
+                        Clicked="BtnSaveChanges_Clicked"
                         HorizontalOptions="CenterAndExpand"
                         Margin="0,0,0,5"
                         WidthRequest="220"/>
                 <Button x:Name="btnDropAd" Text="Опубликовать"
-                        Clicked="btnDropAd_Clicked"
+                        Clicked="BtnDropAd_Clicked"
                         HorizontalOptions="CenterAndExpand"
                         Margin="0,0,0,10"
                         WidthRequest="220"/>

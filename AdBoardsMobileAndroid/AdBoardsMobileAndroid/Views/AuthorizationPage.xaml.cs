@@ -37,8 +37,13 @@ namespace AdBoardsMobileAndroid.Views
             }
         }
 
-        async private void btnSignIn_Clicked(object sender, EventArgs e)
+        async private void BtnSignIn_Clicked(object sender, EventArgs e)
         {
+            if (tbLogin.Text == null || tbPassword.Text == null)
+            {
+                await DisplayAlert("Ошибка", "Заполните поля", "ОК");
+                return;
+            }
             Context.UserNow = await Context.Api.Authorize(tbLogin.Text, tbPassword.Text);
             Context.Api.Jwt = Context.UserNow.Token;
             
@@ -51,12 +56,12 @@ namespace AdBoardsMobileAndroid.Views
             Application.Current.MainPage = new AppShell();
         }
 
-        async private void btnSignUp_Clicked(object sender, EventArgs e)
+        async private void BtnSignUp_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new RegistrationPage());
         }
 
-        async private void btnRecoverPass_Clicked(object sender, EventArgs e)
+        async private void BtnRecoverPass_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new RecoveryPasswordPage());
         }

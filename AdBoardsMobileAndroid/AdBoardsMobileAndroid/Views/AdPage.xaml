@@ -27,8 +27,8 @@
                            Text="Продавец"
                            VerticalOptions="Center"/>
                 </StackLayout>
-                
-                <Image Source="icon_image.png"
+
+                <Image Source="{Binding PhotoName}"
                        x:Name="imgAd"
                        WidthRequest="350"
                        HeightRequest="350"/>
@@ -58,12 +58,12 @@
                 </StackLayout>
 
                 <Button x:Name="btnAddToFavorites" Text="Добавить в избранное"
-                        Clicked="btnAddToFavorites_Clicked"
+                        Clicked="BtnAddToFavorites_Clicked"
                         HorizontalOptions="CenterAndExpand"
                         WidthRequest="250"
                         Margin="0,0,0,5"/>
                 <Button x:Name="btnComplaint" Text="Пожаловаться"
-                        Clicked="btnComplaint_Clicked"
+                        Clicked="BtnComplaint_Clicked"
                         HorizontalOptions="CenterAndExpand"
                         WidthRequest="250"
                         Margin="0,0,0,10"/>

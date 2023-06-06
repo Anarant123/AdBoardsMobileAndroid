@@ -14,7 +14,7 @@
                        x:Name="imgAd"
                        HeightRequest="350"/>
                 <Button x:Name="btnGetPhoto" Text="Выбрать фото"
-                        Clicked="btnGetPhoto_Clicked"
+                        Clicked="BtnGetPhoto_Clicked"
                         HorizontalOptions="CenterAndExpand"/>
                 
                 
@@ -48,7 +48,7 @@
                 </Picker>
                 
                 <Button x:Name="btnCreateAd" Text="Опубликовать"
-                        Clicked="btnCreateAd_Clicked"
+                        Clicked="BtnCreateAd_Clicked"
                         HorizontalOptions="CenterAndExpand"
                         Margin="0,0,0,10"/>
             </StackLayout>

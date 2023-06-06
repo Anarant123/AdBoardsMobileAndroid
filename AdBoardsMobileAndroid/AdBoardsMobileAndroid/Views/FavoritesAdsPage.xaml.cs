@@ -1,5 +1,6 @@
 ﻿using AdBoardsMobileAndroid.Models.db;
 using AdBoardsMobileAndroid.Models;
+using AdBoards.ApiClient.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using AdBoards.ApiClient.Contracts.Responses;
 
 namespace AdBoardsMobileAndroid.Views
 {
@@ -22,39 +24,23 @@ namespace AdBoardsMobileAndroid.Views
 			InitializeComponent ();
 		}
 
-        private async void cvAds_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void CvAds_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-            if (e.CurrentSelection != null)
-            {
-                Context.AdNow = (Ad)e.CurrentSelection.FirstOrDefault();
-                await Navigation.PushAsync(new AdPage(true));
-            }
+            Context.AdNow = new Ad();
+            Context.AdNow = (cvAds.SelectedItem as Ad);
+            Context.AdNow.IsFavorite = true;
+            await Navigation.PushAsync(new AdPage(true));
         }
 
         protected async override void OnAppearing()
         {
             base.OnAppearing();
 
-            //var httpClient = new HttpClient();
-            //var request = new HttpRequestMessage(HttpMethod.Get, $"http://{IPv4.ip}:5228/Ads/GetFavoritesAds?id={Context.UserNow.Id}");
-            //var response = await httpClient.SendAsync(request);
-            //var responseContent = await response.Content.ReadAsStringAsync();
-
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    Context.AdList = new AdListViewModel();
-
-            //    var options = new JsonSerializerOptions
-            //    {
-            //        PropertyNamingPolicy = JsonNamingPolicy.CamelCase, // Используйте это, если нужно преобразование в camelCase
-            //        ReferenceHandler = ReferenceHandler.Preserve
-            //    };
-
-            //    Context.AdList.Ads = JsonSerializer.Deserialize<List<Ad>>(responseContent, options);
-
-            //    cvAds.ItemsSource = Context.AdList.Ads.ToList();
-            //}
+            Context.AdList = new AdListViewModel
+            {
+                Ads = await Context.Api.GetFavoritesAds()
+            };
+            cvAds.ItemsSource = Context.AdList.Ads.ToList();
         }
 
         private void ToolbarItem_Clicked(object sender, EventArgs e)
@@ -62,51 +48,15 @@ namespace AdBoardsMobileAndroid.Views
             filterContainer.IsVisible = !filterContainer.IsVisible;
         }
 
-        private async void btnUseFilter_Clicked(object sender, EventArgs e)
+        private async void BtnUseFilter_Clicked(object sender, EventArgs e)
         {
-            //bool result;
-            //string responseContent;
+            cvAds.ItemsSource = await Context.Api.UseFulter(3, tbPriceFrom.Text, tbPriceTo.Text, tbCity.Text, Convert.ToInt32(pickerCategory.SelectedIndex), (bool)rbBuy.IsChecked!, (bool)rbSell.IsChecked!);
 
-            //var httpClient = new HttpClient();
-            //using HttpResponseMessage response = await httpClient.GetAsync($"http://localhost:5228/Ads/GetFavoritesAds?id={Context.UserNow.Id}");
-            //var jsonResponse = await response.Content.ReadAsStringAsync();
-            //responseContent = await response.Content.ReadAsStringAsync();
-            //result = response.IsSuccessStatusCode;
-
-            //if (result)
-            //{
-            //    Context.AdList = new AdListViewModel();
-
-            //    var options = new JsonSerializerOptions
-            //    {
-            //        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            //        ReferenceHandler = ReferenceHandler.Preserve
-            //    };
-
-            //    Context.AdList.Ads = JsonSerializer.Deserialize<List<Ad>>(responseContent, options);
-
-            //    if (!string.IsNullOrEmpty(tbPriceFrom.Text))
-            //        Context.AdList.Ads = Context.AdList.Ads.Where(x => x.Price >= Convert.ToInt32(tbPriceFrom.Text)).ToList();
-            //    if (!string.IsNullOrEmpty(tbPriceTo.Text))
-            //        Context.AdList.Ads = Context.AdList.Ads.Where(x => x.Price <= Convert.ToInt32(tbPriceTo.Text)).ToList();
-            //    if (!string.IsNullOrEmpty(tbCity.Text))
-            //        Context.AdList.Ads = Context.AdList.Ads.Where(x => x.City == tbCity.Text).ToList();
-            //    if (pickerCategory.SelectedIndex != 0)
-            //        Context.AdList.Ads = Context.AdList.Ads.Where(x => x.CotegorysId == pickerCategory.SelectedIndex).ToList();
-            //    if (Convert.ToBoolean(rbBuy.IsChecked))
-            //        Context.AdList.Ads = Context.AdList.Ads.Where(x => x.TypeOfAdId == 1).ToList();
-            //    else if (Convert.ToBoolean(rbSell.IsChecked))
-            //        Context.AdList.Ads = Context.AdList.Ads.Where(x => x.TypeOfAdId == 2).ToList();
-
-            //    cvAds.ItemsSource = Context.AdList.Ads;
-            //}
-            //else
-            //{
+            //if (cvAds. == 0)
             //    await DisplayAlert("Ошибка", "С данными фильтрами ничего не найдено", "ОК");
-            //}
         }
 
-        private void btnDropFilter_Clicked(object sender, EventArgs e)
+        private void BtnDropFilter_Clicked(object sender, EventArgs e)
         {
             tbCity.Text = "";
             tbPriceFrom.Text = "";

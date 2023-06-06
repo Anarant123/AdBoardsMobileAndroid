@@ -1,5 +1,6 @@
 ﻿using AdBoardsMobileAndroid.Models;
 using AdBoardsMobileAndroid.Models.db;
+using AdBoards.ApiClient.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,36 +25,22 @@ namespace AdBoardsMobileAndroid.Views
 
         protected async override void OnAppearing()
         {
-            //base.OnAppearing();
+            base.OnAppearing();
 
-            //var httpClient = new HttpClient();
-            //var request = new HttpRequestMessage(HttpMethod.Get, $"http://{IPv4.ip}:5228/Ads/GetMyAds?id={Context.UserNow.Id}");
-            //var response = await httpClient.SendAsync(request);
-            //var responseContent = await response.Content.ReadAsStringAsync();
-
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    Context.AdList = new AdListViewModel();
-
-            //    var options = new JsonSerializerOptions
-            //    {
-            //        PropertyNamingPolicy = JsonNamingPolicy.CamelCase, // Используйте это, если нужно преобразование в camelCase
-            //        ReferenceHandler = ReferenceHandler.Preserve
-            //    };
-
-            //    Context.AdList.Ads = JsonSerializer.Deserialize<List<Ad>>(responseContent, options);
-
-            //    cvAds.ItemsSource = Context.AdList.Ads.ToList();
-            //}
+            Context.AdList = new AdListViewModel
+            {
+                Ads = await Context.Api.GetMyAds()
+            };
+            cvAds.ItemsSource = Context.AdList.Ads.ToList();
         }
 
-        private async void cvAds_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void CvAds_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.CurrentSelection != null)
-            {
-                Context.AdNow = (Ad)e.CurrentSelection.FirstOrDefault();
-                await Shell.Current.GoToAsync(nameof(MyAdPage));
-            }
+            //if (e.CurrentSelection != null)
+            //{
+            //    Context.AdNow = (Ad)e.CurrentSelection.FirstOrDefault();
+            //    await Shell.Current.GoToAsync(nameof(MyAdPage));
+            //}
         }
 
         private void ToolbarItem_Clicked(object sender, EventArgs e)
@@ -61,7 +48,7 @@ namespace AdBoardsMobileAndroid.Views
             filterContainer.IsVisible = !filterContainer.IsVisible;
         }
 
-        private async void btnUseFilter_Clicked(object sender, EventArgs e)
+        private async void BtnUseFilter_Clicked(object sender, EventArgs e)
         {
             //bool result;
             //string responseContent;
@@ -105,7 +92,7 @@ namespace AdBoardsMobileAndroid.Views
             //}
         }
 
-        private void btnDropFilter_Clicked(object sender, EventArgs e)
+        private void BtnDropFilter_Clicked(object sender, EventArgs e)
         {
             tbCity.Text = "";
             tbPriceFrom.Text = "";

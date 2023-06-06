@@ -1,16 +1,8 @@
-﻿using AdBoardsMobileAndroid.Models;
+﻿using AdBoards.ApiClient.Contracts.Requests;
+using AdBoards.ApiClient.Extensions;
 using AdBoardsMobileAndroid.Models.db;
-using AdBoardsMobileAndroid.Models.DTO;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
-using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 
 namespace AdBoardsMobileAndroid.Views
@@ -23,7 +15,7 @@ namespace AdBoardsMobileAndroid.Views
             InitializeComponent();
         }
 
-        private async void btnRegistration_Clicked(object sender, EventArgs e)
+        private async void BtnRegistration_Clicked(object sender, EventArgs e)
         {
             DateTime selectedDate = dpBirthday.Date;
             DateTime currentDate = DateTime.Now;
@@ -34,38 +26,32 @@ namespace AdBoardsMobileAndroid.Views
                 return;
             }
 
-            PersonDTO person = new PersonDTO();
-
-            if (tbPassword1.Text == tbPassword2.Text)
-            {
-                person.RightId = 1;
-                person.Login = tbLogin.Text;
-                person.Birthday = dpBirthday.Date;
-                person.Phone = tbPhone.Text;
-                person.Email = tbEmail.Text;
-                person.Password = tbPassword1.Text;
-
-                var httpClient = new HttpClient();
-                using StringContent jsonContent = new(JsonSerializer.Serialize(person), Encoding.UTF8, "application/json");
-                using HttpResponseMessage response = await httpClient.PostAsync($"http://{IPv4.ip}:5228/People/Registration", jsonContent);
-                var jsonResponse = await response.Content.ReadAsStringAsync();
-
-                Person p = new Person();
-
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                {
-                    await Navigation.PopAsync();
-                }
-                else
-                {
-                    await DisplayAlert("Ошибка", "Пользователь с данным логином или Email уже существует", "ОК");
-                }
-            }
-            else
+            if (tbPassword1.Text != tbPassword2.Text)
             {
                 await DisplayAlert("Ошибка", "Пароли должны совпадать!", "ОК");
+                return;
             }
-            await Navigation.PopAsync();
+
+            PersonReg person = new()
+            {
+                Login = tbLogin.Text,
+                Birthday = dpBirthday.Date,
+                Phone = tbPhone.Text,
+                Email = tbEmail.Text,
+                Password = tbPassword1.Text,
+                ConfirmPassword = tbPassword2.Text
+            };
+
+            var result = await Context.Api.Registr(person);
+            
+
+            if (result)
+            {
+                await Navigation.PopAsync();
+                return;
+            }
+            await DisplayAlert("Ошибка", "Пользователь с данным логином или Email уже существует", "ОК");
+
         }
     }
 }

@@ -13,7 +13,7 @@
                        FontSize="Title" IsPassword="True"/>
                 <Button x:Name="btnSignIn" Text="Войти"
                         Margin="0,20,0,0"
-                        Clicked="btnSignIn_Clicked"/>
+                        Clicked="BtnSignIn_Clicked"/>
                 <Grid HorizontalOptions="CenterAndExpand">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -21,14 +21,14 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="btnSignUp" Text="Зарегестрироваться"
                             Margin="0,20,0,0"
-                            Clicked="btnSignUp_Clicked"
+                            Clicked="BtnSignUp_Clicked"
                             FontSize="12"
                             Grid.Column="0"
                             WidthRequest="200"/>
                     <Button x:Name="btnRecoverPass" Text="Забыл пароль"
                             Margin="0,20,0,0"
                             FontSize="12"
-                            Clicked="btnRecoverPass_Clicked"
+                            Clicked="BtnRecoverPass_Clicked"
                             Grid.Column="1"
                             WidthRequest="200"/>
                 </Grid>

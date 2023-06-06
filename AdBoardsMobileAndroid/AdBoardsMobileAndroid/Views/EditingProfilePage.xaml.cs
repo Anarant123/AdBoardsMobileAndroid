@@ -1,6 +1,7 @@
 ﻿using AdBoardsMobileAndroid.Models;
 using AdBoardsMobileAndroid.Models.db;
 using AdBoardsMobileAndroid.Models.DTO;
+using AdBoards.ApiClient.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,59 +13,59 @@ using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using AdBoards.ApiClient.Contracts.Requests;
+using AdBoards.ApiClient.Contracts.Responses;
+using Microsoft.AspNetCore.Http.Internal;
 
 namespace AdBoardsMobileAndroid.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EditingProfilePage : ContentPage
     {
-        PersonDTO p = new PersonDTO();
+        EditPersonModel p = new();
         public EditingProfilePage()
         {
             InitializeComponent();
 
-            //imgProfile.Source = Context.UserNow.Img;
-            //tbName.Text = Context.UserNow.Name;
-            //tbCity.Text = Context.UserNow.City;
-            //tbEmail.Text = Context.UserNow.Email;
-            //tbPhone.Text = Context.UserNow.Phone;
-            //dpBirthday.Date = Convert.ToDateTime(Context.UserNow.Birthday);
+            var person = Context.UserNow.Person;
+
+            imgProfile.Source = person.PhotoName;
+            tbName.Text = person.Name;
+            tbCity.Text = person.City;
+            tbEmail.Text = person.Email;
+            tbPhone.Text = person.Phone;
+            dpBirthday.Date = Convert.ToDateTime(person.Birthday);
         }
 
-        async private void btnSaveChanges_Clicked(object sender, EventArgs e)
+        async private void BtnSaveChanges_Clicked(object sender, EventArgs e)
         {
-            //p.Login = Context.UserNow.Login;
-            //p.Name = tbName.Text;
-            //p.Birthday = Convert.ToDateTime(dpBirthday.Date);
-            //p.City = tbCity.Text;
-            //p.Email = tbEmail.Text;
-            //p.Phone = tbPhone.Text;
+            p.Name = tbName.Text;
+            p.Birthday = Convert.ToDateTime(dpBirthday.Date);
+            p.City = tbCity.Text;
+            p.Email = tbEmail.Text;
+            p.Phone = tbPhone.Text;
 
-            //var httpClient = new HttpClient();
-            //using StringContent jsonContent = new(JsonSerializer.Serialize(p), Encoding.UTF8, "application/json");
-            //using HttpResponseMessage response = await httpClient.PutAsync($"http://{IPv4.ip}:5228/People/Update", jsonContent);
-            //var jsonResponse = await response.Content.ReadAsStringAsync();
+            await Context.Api.PersonUpdate(p);
+            var person = await Context.Api.UpdatePersonPhoto(p);
 
-            //if (response.StatusCode == System.Net.HttpStatusCode.OK)
-            //{
-            //    Person p = JsonSerializer.Deserialize<Person>(jsonResponse)!;
-            //    Context.UserNow = p;
-            //    await DisplayAlert("Успешно", "Данные профиля изменились!", "OK");
-            //    await Shell.Current.Navigation.PopAsync();
-            //}
-            //else
-            //{
-            //    await DisplayAlert("Ошибка", "Что то пошло не так", "OK");
-            //}
+            if (person == null) 
+            {
+                await DisplayAlert("Ошибка", "Что-то пошло не так", "OK");
+                return;
+            }
+
+            Context.UserNow.Person = person;
+            await DisplayAlert("Успех", "Вы успешно изменили данные профиля", "OK");
         }
 
-        private async void btnGetPhoto_Clicked(object sender, EventArgs e)
+        private async void BtnGetPhoto_Clicked(object sender, EventArgs e)
         {
             try
             {
                 var photo = await MediaPicker.PickPhotoAsync();
                 imgProfile.Source = ImageSource.FromFile(photo.FullPath);
-                p.Photo = File.ReadAllBytes(photo.FullPath);
+                var stream = new FileStream(photo.FullPath, FileMode.Open);
+                p.Photo = new FormFile(stream, 0, stream.Length, "streamFile", Path.GetFileName(photo.FullPath));
             }
             catch (Exception ex)
             {

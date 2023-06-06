@@ -18,7 +18,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="tbiEditProfile" 
                      IconImageSource="icon_edit.png" 
-                     Clicked="tbiEditProfile_Clicked"/>
+                     Clicked="TbiEditProfile_Clicked"/>
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
@@ -55,7 +55,7 @@
 
                 <Button x:Name="btnExit"
                         Text="Выйти"
-                        Clicked="btnExit_Clicked"/>
+                        Clicked="BtnExit_Clicked"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

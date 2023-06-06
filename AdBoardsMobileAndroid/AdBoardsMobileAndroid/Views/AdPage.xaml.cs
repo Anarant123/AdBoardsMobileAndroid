@@ -1,5 +1,6 @@
 ﻿using AdBoardsMobileAndroid.Models;
 using AdBoardsMobileAndroid.Models.db;
+using AdBoards.ApiClient.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace AdBoardsMobileAndroid.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AdPage : ContentPage
     {
-        bool isF = false;
+        bool isF;
         public AdPage()
         {
             InitializeComponent();
@@ -39,49 +40,54 @@ namespace AdBoardsMobileAndroid.Views
             lbPhone.Text = Context.AdNow.Person.Phone;
             lbPrice.Text = Context.AdNow.Price.ToString();
             lbSalesman.Text = Context.AdNow.Person.Name;
-            imgAd.Source = Context.AdNow.Img;
-            imgPerson.Source = Context.AdNow.Person.Img;
+            imgAd.Source = Context.AdNow.PhotoName;
+            imgPerson.Source = Context.AdNow.Person.PhotoName;
 
 
         }
 
-        private async void btnAddToFavorites_Clicked(object sender, EventArgs e)
+        private async void BtnAddToFavorites_Clicked(object sender, EventArgs e)
         {
-            //if (isF)
-            //{
-            //    var httpClient = new HttpClient();
-            //    using HttpResponseMessage response = await httpClient.DeleteAsync($"http://{IPv4.ip}:5228/Favorites/Delete?AdId={Context.AdNow.Id}&PersonId={Context.UserNow.Id}");
-            //    var jsonResponse = await response.Content.ReadAsStringAsync();
-            //    if (!Context.AdList.Ads.Any())
-            //        Context.AdList.Ads = null;
+            if (isF)
+            {
+                var result = await Context.Api.DeleteFromFavorites(Context.AdNow.Id);
+                if (!result)
+                {
+                    await DisplayAlert("Ошибка", "Что то пошло не так...", "ОК");
+                    return;
+                }
 
-            //    await Shell.Current.Navigation.PopAsync();
-            //}
-            //else
-            //{
-            //    var httpClient = new HttpClient();
-            //    var request = new HttpRequestMessage(HttpMethod.Post, $"http://{IPv4.ip}:5228/Favorites/Addition?AdId={Context.AdNow.Id}&PersonId={Context.UserNow.Id}");
-            //    var response = await httpClient.SendAsync(request);
+                await DisplayAlert("Успешно", "Объявление удалено из избранного", "ОК");
+                btnAddToFavorites.Text = "Добавить в избранное";
+                isF = false;
+            }
+            else
+            {
+                var result = await Context.Api.AddToFavorites(Context.AdNow.Id);
 
-            //    if (response.IsSuccessStatusCode)
-            //        await DisplayAlert("Успешно", "Объявление добавленно в избранное", "ОК");
-            //    else
-            //        await DisplayAlert("Ошибка", "Объявление уже в избранном", "ОК");
-            //}
+                if (!result)
+                {
+                    await DisplayAlert("Ошибка", "Что то пошло не так...", "ОК");
+                    return;
+                }
+                await DisplayAlert("Успешно", "Объявление добавленно в избранное", "ОК");
+                btnAddToFavorites.Text = "Удалить из избранного";
+                isF = true;
+            }
         }
 
-        private async void btnComplaint_Clicked(object sender, EventArgs e)
+        private async void BtnComplaint_Clicked(object sender, EventArgs e)
         {
-            //var httpClient = new HttpClient();
-            //var request = new HttpRequestMessage(HttpMethod.Post, $"http://{IPv4.ip}:5228/Complaint/Addition?AdId={Context.AdNow.Id}&PersonId={Context.UserNow.Id}");
-            //var response = await httpClient.SendAsync(request);
-            //var responseContent = await response.Content.ReadAsStringAsync();
+            var result = await Context.Api.AddToComplaints(Context.AdNow.Id);
 
 
-            //if (response.IsSuccessStatusCode)
-            //    await DisplayAlert("Успешно", "Жалоба отправленна", "ОК");
-            //else
-            //    await DisplayAlert("Ошибка", "Вы уже пожаловались", "ОК");
+            if (!result)
+            {
+                await DisplayAlert("Успешно", "Вы уже пожаловались", "ОК");
+                return;
+            }
+
+            await DisplayAlert("Ошибка", "Жалоба успешно отправленна", "ОК");
         }
     }
 }
