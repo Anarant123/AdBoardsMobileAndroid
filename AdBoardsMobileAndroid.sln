@@ -5,7 +5,9 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdBoardsMobileAndroid.Android", "AdBoardsMobileAndroid\AdBoardsMobileAndroid.Android\AdBoardsMobileAndroid.Android.csproj", "{E9D83EA3-33F7-4F45-82B2-6C315C39262C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdBoardsMobileAndroid", "AdBoardsMobileAndroid\AdBoardsMobileAndroid\AdBoardsMobileAndroid.csproj", "{15EA817D-4355-4EA9-AE53-61A989F04222}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdBoardsMobileAndroid", "AdBoardsMobileAndroid\AdBoardsMobileAndroid\AdBoardsMobileAndroid.csproj", "{15EA817D-4355-4EA9-AE53-61A989F04222}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdBoards.ApiClient", "..\AdBoardsWebAPI\AdBoards.ApiClient\AdBoards.ApiClient.csproj", "{2070D4A7-CFF7-4FAC-9D7A-047256266DFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{15EA817D-4355-4EA9-AE53-61A989F04222}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15EA817D-4355-4EA9-AE53-61A989F04222}.Release|Any CPU.Build.0 = Release|Any CPU
 		{15EA817D-4355-4EA9-AE53-61A989F04222}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{2070D4A7-CFF7-4FAC-9D7A-047256266DFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2070D4A7-CFF7-4FAC-9D7A-047256266DFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2070D4A7-CFF7-4FAC-9D7A-047256266DFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2070D4A7-CFF7-4FAC-9D7A-047256266DFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

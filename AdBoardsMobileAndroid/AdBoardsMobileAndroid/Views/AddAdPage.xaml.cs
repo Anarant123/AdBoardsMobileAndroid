@@ -43,35 +43,35 @@ namespace AdBoardsMobileAndroid.Views
 
         async private void btnCreateAd_Clicked(object sender, EventArgs e)
         {
-            ad.Name = tbName.Text;
-            ad.City = tbCity.Text;
-            ad.Date = DateTime.Now;
-            ad.CotegorysId = pickerCategory.SelectedIndex + 1;
-            ad.Description = tbDescription.Text;
-            ad.Price = Convert.ToInt32(tbPrice.Text);
-            if (rbBuy.IsChecked == true)
-                ad.TypeOfAdId = 1;
-            else
-                ad.TypeOfAdId = 2;
-            ad.PersonId = Context.UserNow.Id;
+            //ad.Name = tbName.Text;
+            //ad.City = tbCity.Text;
+            //ad.Date = DateTime.Now;
+            //ad.CotegorysId = pickerCategory.SelectedIndex + 1;
+            //ad.Description = tbDescription.Text;
+            //ad.Price = Convert.ToInt32(tbPrice.Text);
+            //if (rbBuy.IsChecked == true)
+            //    ad.TypeOfAdId = 1;
+            //else
+            //    ad.TypeOfAdId = 2;
+            //ad.PersonId = Context.UserNow.Id;
 
-            var httpClient = new HttpClient();
-            using StringContent jsonContent = new(JsonSerializer.Serialize(ad), Encoding.UTF8, "application/json");
-            using HttpResponseMessage response = await httpClient.PostAsync($"http://{IPv4.ip}:5228/Ads/Addition", jsonContent);
-            var jsonResponse = await response.Content.ReadAsStringAsync();
+            //var httpClient = new HttpClient();
+            //using StringContent jsonContent = new(JsonSerializer.Serialize(ad), Encoding.UTF8, "application/json");
+            //using HttpResponseMessage response = await httpClient.PostAsync($"http://{IPv4.ip}:5228/Ads/Addition", jsonContent);
+            //var jsonResponse = await response.Content.ReadAsStringAsync();
 
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
-            {
-                Ad a = JsonSerializer.Deserialize<Ad>(jsonResponse)!;
-                Context.AdNow = a;
+            //if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            //{
+            //    Ad a = JsonSerializer.Deserialize<Ad>(jsonResponse)!;
+            //    Context.AdNow = a;
 
-                await DisplayAlert("Успешно", "Вы добавили объявление", "ОК");
-                await Shell.Current.GoToAsync(nameof(MyAdPage));
-            }
-            else
-            {
-                await DisplayAlert("Ошибка", "Что то пошло не так! \nОбъявление добавить не удалось...", "ОК");
-            }
+            //    await DisplayAlert("Успешно", "Вы добавили объявление", "ОК");
+            //    await Shell.Current.GoToAsync(nameof(MyAdPage));
+            //}
+            //else
+            //{
+            //    await DisplayAlert("Ошибка", "Что то пошло не так! \nОбъявление добавить не удалось...", "ОК");
+            //}
         }
     }
 }

@@ -24,12 +24,12 @@ namespace AdBoardsMobileAndroid.Views
         {
             base.OnAppearing();
 
-            imgProfile.Source = Context.UserNow.Img;
+            //imgProfile.Source = Context.UserNow.Img;
 
-            lblName.Text = Context.UserNow.Name;
-            lblCity.Text = Context.UserNow.City;
-            lblEmail.Text = Context.UserNow.Email;
-            lblPhone.Text = Context.UserNow.Phone;
+            //lblName.Text = Context.UserNow.Name;
+            //lblCity.Text = Context.UserNow.City;
+            //lblEmail.Text = Context.UserNow.Email;
+            //lblPhone.Text = Context.UserNow.Phone;
         }
 
         async private void tbiEditProfile_Clicked(object sender, EventArgs e)
