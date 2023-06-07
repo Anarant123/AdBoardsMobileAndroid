@@ -1,21 +1,13 @@
-﻿using AdBoardsMobileAndroid.Models;
-using AdBoardsMobileAndroid.Models.db;
-using AdBoardsMobileAndroid.Models.DTO;
+﻿using AdBoards.ApiClient.Contracts.Requests;
+using AdBoards.ApiClient.Contracts.Responses;
 using AdBoards.ApiClient.Extensions;
+using AdBoardsMobileAndroid.Models.db;
+using Microsoft.AspNetCore.Http.Internal;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using AdBoards.ApiClient.Contracts.Requests;
-using AdBoards.ApiClient.Contracts.Responses;
-using Microsoft.AspNetCore.Http.Internal;
 
 namespace AdBoardsMobileAndroid.Views
 {

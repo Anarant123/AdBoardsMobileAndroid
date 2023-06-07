@@ -32,6 +32,12 @@ namespace AdBoardsMobileAndroid.Views
                 return;
             }
 
+            if (tbLogin.Text == "" || tbPhone.Text == "" || tbEmail.Text == "" || tbPassword1.Text == "")
+            {
+                await DisplayAlert("Ошибка", "Заполните все поля!", "ОК");
+                return;
+            }
+
             PersonReg person = new()
             {
                 Login = tbLogin.Text,

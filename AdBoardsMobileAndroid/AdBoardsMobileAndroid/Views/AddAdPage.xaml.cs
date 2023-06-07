@@ -1,25 +1,16 @@
-﻿using AdBoardsMobileAndroid.Models;
-using AdBoardsMobileAndroid.Models.db;
-using AdBoardsMobileAndroid.Models.DTO;
+﻿using AdBoards.ApiClient.Contracts.Requests;
 using AdBoards.ApiClient.Extensions;
+using AdBoardsMobileAndroid.Models.db;
+using Microsoft.AspNetCore.Http.Internal;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using AdBoards.ApiClient.Contracts.Requests;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
 
 namespace AdBoardsMobileAndroid.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AddAdPage : ContentPage
 	{
         readonly AddAdModel ad = new();
@@ -48,6 +39,14 @@ namespace AdBoardsMobileAndroid.Views
 
         async private void BtnCreateAd_Clicked(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(tbName.Text) || string.IsNullOrEmpty(tbCity.Text) || string.IsNullOrEmpty(tbPrice.Text))
+            {
+                await DisplayAlert("Ошибка", "Заполните все поля!", "ОК");
+                return;
+            }
+
+
+
             ad.Name = tbName.Text;
             ad.City = tbCity.Text;
             ad.CategoryId = pickerCategory.SelectedIndex + 1;
