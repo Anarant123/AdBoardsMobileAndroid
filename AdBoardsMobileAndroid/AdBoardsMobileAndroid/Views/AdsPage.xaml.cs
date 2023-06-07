@@ -42,6 +42,7 @@ namespace AdBoardsMobileAndroid.Views
             if(e.CurrentSelection!= null)
             {
                 Context.AdNow = (Ad)e.CurrentSelection.FirstOrDefault();
+                Context.AdNow = await Context.Api.GetAd(Context.AdNow.Id);
                 await Shell.Current.GoToAsync(nameof(AdPage));
             }
         }
@@ -62,46 +63,10 @@ namespace AdBoardsMobileAndroid.Views
 
         private async void BtnUseFilter_Clicked(object sender, EventArgs e)
         {
-            bool result;
-            string responseContent;
+            cvAds.ItemsSource = await Context.Api.UseFulter(1, tbPriceFrom.Text, tbPriceTo.Text, tbCity.Text, Convert.ToInt32(pickerCategory.SelectedIndex), (bool)rbBuy.IsChecked!, (bool)rbSell.IsChecked!);
 
-            var httpClient = new HttpClient();
-            using HttpResponseMessage response = await httpClient.GetAsync($"http://{IPv4.ip}:5228/Ads/GetAds");
-            var jsonResponse = await response.Content.ReadAsStringAsync();
-            responseContent = await response.Content.ReadAsStringAsync();
-            result = response.IsSuccessStatusCode;
-
-            if (result)
-            {
-                Context.AdList = new AdListViewModel();
-
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                    ReferenceHandler = ReferenceHandler.Preserve
-                };
-
-                Context.AdList.Ads = JsonSerializer.Deserialize<List<Ad>>(responseContent, options);
-
-                if (!string.IsNullOrEmpty(tbPriceFrom.Text))
-                    Context.AdList.Ads = Context.AdList.Ads.Where(x => x.Price >= Convert.ToInt32(tbPriceFrom.Text)).ToList();
-                if (!string.IsNullOrEmpty(tbPriceTo.Text))
-                    Context.AdList.Ads = Context.AdList.Ads.Where(x => x.Price <= Convert.ToInt32(tbPriceTo.Text)).ToList();
-                if (!string.IsNullOrEmpty(tbCity.Text))
-                    Context.AdList.Ads = Context.AdList.Ads.Where(x => x.City == tbCity.Text).ToList();
-                if (pickerCategory.SelectedIndex != 0)
-                    Context.AdList.Ads = Context.AdList.Ads.Where(x => x.Category.Id == pickerCategory.SelectedIndex).ToList();
-                if (Convert.ToBoolean(rbBuy.IsChecked))
-                    Context.AdList.Ads = Context.AdList.Ads.Where(x => x.AdType.Id == 1).ToList();
-                else if (Convert.ToBoolean(rbSell.IsChecked))
-                    Context.AdList.Ads = Context.AdList.Ads.Where(x => x.AdType.Id == 2).ToList();
-
-                cvAds.ItemsSource = Context.AdList.Ads;
-            }
-            else
-            {
-                await DisplayAlert("Ошибка", "С данными фильтрами ничего не найдено", "ОК");
-            }
+            if ((cvAds.ItemsSource as List<Ad>).Count == 0)
+                await DisplayAlert("Сообщение об ошибке", "С данными фильтрами ничего не найденно", "OK");
         }
     }
 }

@@ -56,7 +56,7 @@ namespace AdBoardsMobileAndroid.Views
             ad.AdTypeId = rbBuy.IsChecked ? 1 : 2;
 
             ad.Id = (await Context.Api.AddAd(ad)).Id;
-            await Context.Api.UpdateAdPhoto(ad);
+            Context.AdNow = await Context.Api.UpdateAdPhoto(ad);
 
             if (Context.AdNow == null)
             {

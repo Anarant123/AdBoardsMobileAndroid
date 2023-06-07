@@ -45,8 +45,9 @@ namespace AdBoardsMobileAndroid.Views
             p.Email = tbEmail.Text;
             p.Phone = tbPhone.Text;
 
-            await Context.Api.PersonUpdate(p);
-            var person = await Context.Api.UpdatePersonPhoto(p);
+            Person person = await Context.Api.PersonUpdate(p);
+            if (p.Photo != null)
+                person = await Context.Api.UpdatePersonPhoto(p);
 
             if (person == null) 
             {

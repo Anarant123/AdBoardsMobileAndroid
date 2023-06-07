@@ -53,7 +53,7 @@
                         HorizontalOptions="CenterAndExpand"
                         Margin="0,0,0,5"
                         WidthRequest="220"/>
-                <Button x:Name="btnDropAd" Text="Опубликовать"
+                <Button x:Name="btnDropAd" Text="Удалить"
                         Clicked="BtnDropAd_Clicked"
                         HorizontalOptions="CenterAndExpand"
                         Margin="0,0,0,10"

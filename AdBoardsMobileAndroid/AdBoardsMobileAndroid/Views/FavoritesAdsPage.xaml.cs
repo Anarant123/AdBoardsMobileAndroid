@@ -29,7 +29,7 @@ namespace AdBoardsMobileAndroid.Views
             Context.AdNow = new Ad();
             Context.AdNow = (cvAds.SelectedItem as Ad);
             Context.AdNow.IsFavorite = true;
-            await Navigation.PushAsync(new AdPage(true));
+            await Navigation.PushAsync(new AdPage());
         }
 
         protected async override void OnAppearing()
@@ -52,8 +52,8 @@ namespace AdBoardsMobileAndroid.Views
         {
             cvAds.ItemsSource = await Context.Api.UseFulter(3, tbPriceFrom.Text, tbPriceTo.Text, tbCity.Text, Convert.ToInt32(pickerCategory.SelectedIndex), (bool)rbBuy.IsChecked!, (bool)rbSell.IsChecked!);
 
-            //if (cvAds. == 0)
-            //    await DisplayAlert("Ошибка", "С данными фильтрами ничего не найдено", "ОК");
+            if ((cvAds.ItemsSource as List<Ad>).Count == 0)
+                await DisplayAlert("Сообщение об ошибке", "С данными фильтрами ничего не найденно", "OK");
         }
 
         private void BtnDropFilter_Clicked(object sender, EventArgs e)

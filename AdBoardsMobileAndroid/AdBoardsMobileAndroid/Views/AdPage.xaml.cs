@@ -22,13 +22,6 @@ namespace AdBoardsMobileAndroid.Views
         {
             InitializeComponent();
         }
-        public AdPage(bool isFavorites)
-        {
-            InitializeComponent();
-
-            isF = isFavorites;
-            btnAddToFavorites.Text = "Удалить из избранного";
-        }
 
         protected async override void OnAppearing()
         {
@@ -43,7 +36,9 @@ namespace AdBoardsMobileAndroid.Views
             imgAd.Source = Context.AdNow.PhotoName;
             imgPerson.Source = Context.AdNow.Person.PhotoName;
 
-
+            isF = Context.AdNow.IsFavorite;
+            if(isF)
+                btnAddToFavorites.Text = "Удалить из избранного";
         }
 
         private async void BtnAddToFavorites_Clicked(object sender, EventArgs e)

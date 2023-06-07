@@ -53,6 +53,8 @@ namespace AdBoardsMobileAndroid.Views
                 return;
             }
 
+            Preferences.Set("UserLogin", tbLogin.Text);
+            Preferences.Set("UserPassword", tbPassword.Text);
             Application.Current.MainPage = new AppShell();
         }
 
