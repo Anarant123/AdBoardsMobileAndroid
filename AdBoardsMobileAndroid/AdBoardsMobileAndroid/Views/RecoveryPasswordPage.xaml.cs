@@ -16,6 +16,12 @@ namespace AdBoardsMobileAndroid.Views
 
         private async void BtnSend_Clicked(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(tbLogin.Text))
+            {
+                await DisplayAlert("Ошибка", "Введите логин.", "OK");
+                return;
+            }
+
             await Context.Api.Recover(tbLogin.Text);
 
             await Navigation.PopAsync();

@@ -1,4 +1,5 @@
-﻿using AdBoardsMobileAndroid.Models.db;
+﻿using AdBoards.ApiClient.Extensions;
+using AdBoardsMobileAndroid.Models.db;
 using System;
 using Xamarin.Essentials;
 using Xamarin.Forms;

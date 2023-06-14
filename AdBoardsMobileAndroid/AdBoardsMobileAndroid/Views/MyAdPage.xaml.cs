@@ -38,6 +38,28 @@ namespace AdBoardsMobileAndroid.Views
 
         private async void BtnSaveChanges_Clicked(object sender, EventArgs e)
         {
+            int price;
+            string ValidateFields()
+            {
+                var result = string.Empty;
+                if (!int.TryParse(tbPrice.Text, out price) || price < 0)
+                    result += "Некорректная цена\n";
+
+                if (string.IsNullOrWhiteSpace(tbName.Text))
+                    result += "Название объявления является обязательным полем.\n";
+
+                if (string.IsNullOrWhiteSpace(tbCity.Text))
+                    result += "Город является обязательным полем.\n";
+
+                return result;
+            }
+
+            if (!string.IsNullOrEmpty(ValidateFields()))
+            {
+                await DisplayAlert("Ошибка", ValidateFields(), "OK");
+                return;
+            }
+
             ad.Id = Context.AdNow.Id;
             ad.Name = tbName.Text;
             ad.Description = tbDescription.Text;
@@ -46,20 +68,20 @@ namespace AdBoardsMobileAndroid.Views
                 ad.AdTypeId = 1;
             else if (rbSell.IsChecked == true)
                 ad.AdTypeId = 2;
-            ad.Price = Convert.ToInt32(tbPrice.Text);
+            ad.Price = price;
             ad.City = tbCity.Text;
 
-            Ad a = await Context.Api.AdUpdate(ad);
+            Context.AdNow = await Context.Api.AdUpdate(ad);
+            ad.Id = Context.AdNow.Id;
             if (ad.Photo != null)
-                a = await Context.Api.UpdateAdPhoto(ad);
+                Context.AdNow = await Context.Api.UpdateAdPhoto(ad);
 
-            if (a == null)
+            if (Context.AdNow == null)
             {
                 await DisplayAlert("Ошибка", "Что то пошло не так!", "ОК");
                 return;
             }
 
-            Context.AdNow = a;
             await DisplayAlert("Успешно", "Вы успешно изменили объявление!", "OK");
         }
 

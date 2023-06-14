@@ -23,6 +23,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\AdBoardsWebAPI\AdBoards.ApiClient\AdBoards.ApiClient.csproj" />
+    <ProjectReference Include="..\..\..\AdBoardsWebAPI\AdBoards.Domain\AdBoards.Domain.csproj" />
+    <ProjectReference Include="..\..\..\AdBoardsWebAPI\Functional\Functional.csproj" />
   </ItemGroup>
 
   <ItemGroup>

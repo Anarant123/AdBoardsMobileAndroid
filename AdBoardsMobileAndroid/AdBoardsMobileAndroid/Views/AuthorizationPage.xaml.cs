@@ -24,28 +24,27 @@ namespace AdBoardsMobileAndroid.Views
             InitializeComponent();
         }
 
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
-
-            string login = Preferences.Get("UserLogin", "null");
-            string password = Preferences.Get("UserPassword", "null");
-            if (login != "null")
-            {
-                Context.UserNow = await Context.Api.Authorize(login, password);
-                Context.Api.Jwt = Context.UserNow.Token;
-            }
-        }
-
         async private void BtnSignIn_Clicked(object sender, EventArgs e)
         {
-            if (tbLogin.Text == null || tbPassword.Text == null)
+            var result = string.Empty;
+            string ValidateFields()
             {
-                await DisplayAlert("Ошибка", "Заполните поля", "ОК");
+                if (string.IsNullOrWhiteSpace(tbLogin.Text))
+                    result += "Введите логин!\n";
+
+                if (string.IsNullOrWhiteSpace(tbPassword.Text))
+                    result += "Введите пароль!\n";
+
+                return result;
+            }
+
+            if (!string.IsNullOrEmpty(ValidateFields()))
+            {
+                await DisplayAlert("Ошибка", ValidateFields(), "ОК");
                 return;
             }
+
             Context.UserNow = await Context.Api.Authorize(tbLogin.Text, tbPassword.Text);
-            Context.Api.Jwt = Context.UserNow.Token;
             
             if (Context.UserNow == null)
             {
@@ -53,8 +52,7 @@ namespace AdBoardsMobileAndroid.Views
                 return;
             }
 
-            Preferences.Set("UserLogin", tbLogin.Text);
-            Preferences.Set("UserPassword", tbPassword.Text);
+            Context.Api.Jwt = Context.UserNow.Token;
             Application.Current.MainPage = new AppShell();
         }
 

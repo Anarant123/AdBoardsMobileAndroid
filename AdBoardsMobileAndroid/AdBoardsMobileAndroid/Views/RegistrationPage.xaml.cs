@@ -2,6 +2,9 @@
 using AdBoards.ApiClient.Extensions;
 using AdBoardsMobileAndroid.Models.db;
 using System;
+using System.Globalization;
+using System.Linq;
+using System.Text.RegularExpressions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,24 +20,44 @@ namespace AdBoardsMobileAndroid.Views
 
         private async void BtnRegistration_Clicked(object sender, EventArgs e)
         {
-            DateTime selectedDate = dpBirthday.Date;
-            DateTime currentDate = DateTime.Now;
-            DateTime minDate = currentDate.AddYears(-14);
-            if (selectedDate > minDate)
+
+            string ValidateFields()
             {
-                await DisplayAlert("Ошибка", "Выберите дату, не позднее 14 лет назад.", "OK");
-                return;
+                string result = string.Empty;
+                if (string.IsNullOrWhiteSpace(tbLogin.Text))
+                    result += "Введите логин.\n";
+
+                if (string.IsNullOrWhiteSpace(tbEmail.Text) || !IsValidEmail(tbEmail.Text))
+                    result += "Введите корректный email.\n";
+
+                if (string.IsNullOrWhiteSpace(tbPhone.Text) || !IsValidPhone(tbPhone.Text))
+                    result += "Введите корректный номер телефона.\n";
+
+                if (string.IsNullOrWhiteSpace(tbPassword1.Text) || string.IsNullOrWhiteSpace(tbPassword2.Text) || tbPassword1.Text.Length < 8)
+                    result += "Введите пароль в оба поля.";
+                else if (tbPassword1.Text != tbPassword2.Text)
+                    result += "Пароли не совпадают.\n";
+
+                return result;
             }
 
-            if (tbPassword1.Text != tbPassword2.Text)
+            bool IsValidEmail(string email)
             {
-                await DisplayAlert("Ошибка", "Пароли должны совпадать!", "ОК");
-                return;
+                string pattern = @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
+                Match match = Regex.Match(email, pattern);
+                return match.Success;
             }
 
-            if (tbLogin.Text == "" || tbPhone.Text == "" || tbEmail.Text == "" || tbPassword1.Text == "")
+            bool IsValidPhone(string phone)
             {
-                await DisplayAlert("Ошибка", "Заполните все поля!", "ОК");
+                string pattern = @"^(\+)[1-9][0-9\-().]{9,15}$";
+                Match match = Regex.Match(phone, pattern);
+                return match.Success;
+            }
+
+            if (!string.IsNullOrEmpty(ValidateFields()))
+            {
+                await DisplayAlert("Ошибка", ValidateFields(), "ОК");
                 return;
             }
 
@@ -48,15 +71,18 @@ namespace AdBoardsMobileAndroid.Views
                 ConfirmPassword = tbPassword2.Text
             };
 
-            var result = await Context.Api.Registr(person);
-            
+            var result = (await Context.Api.Registr(person)).ToList();
 
-            if (result)
+
+            if (result.Count == 0)
             {
                 await Navigation.PopAsync();
                 return;
             }
-            await DisplayAlert("Ошибка", "Пользователь с данным логином или Email уже существует", "ОК");
+
+            var error = string.Join(Environment.NewLine, result.Select(x => x.Message));
+
+            await DisplayAlert("Ошибка", error, "ОК");
 
         }
     }

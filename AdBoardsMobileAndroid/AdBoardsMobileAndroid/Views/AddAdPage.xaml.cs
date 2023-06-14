@@ -39,23 +39,40 @@ namespace AdBoardsMobileAndroid.Views
 
         async private void BtnCreateAd_Clicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(tbName.Text) || string.IsNullOrEmpty(tbCity.Text) || string.IsNullOrEmpty(tbPrice.Text))
+            int price;
+            string ValidateFields()
             {
-                await DisplayAlert("Ошибка", "Заполните все поля!", "ОК");
-                return;
+                var result = string.Empty;
+                if (!int.TryParse(tbPrice.Text, out price) || price < 0)
+                    result += "Некорректная цена\n";
+
+
+                if (string.IsNullOrWhiteSpace(tbName.Text))
+                    result += "Название объявления является обязательным полем.\n";
+
+                if (string.IsNullOrWhiteSpace(tbCity.Text))
+                    result += "Город является обязательным полем.\n";
+
+                return result;
             }
 
-
+            if (!string.IsNullOrEmpty(ValidateFields()))
+            {
+                await DisplayAlert("Ошибка", ValidateFields(), "OK");
+                return;
+            }
 
             ad.Name = tbName.Text;
             ad.City = tbCity.Text;
             ad.CategoryId = pickerCategory.SelectedIndex + 1;
             ad.Description = tbDescription.Text;
-            ad.Price = Convert.ToInt32(tbPrice.Text);
+            ad.Price = price;
             ad.AdTypeId = rbBuy.IsChecked ? 1 : 2;
 
-            ad.Id = (await Context.Api.AddAd(ad)).Id;
-            Context.AdNow = await Context.Api.UpdateAdPhoto(ad);
+            Context.AdNow = await Context.Api.AddAd(ad);
+            ad.Id = Context.AdNow.Id;
+            if (ad.Photo != null)
+                Context.AdNow = await Context.Api.UpdateAdPhoto(ad);
 
             if (Context.AdNow == null)
             {

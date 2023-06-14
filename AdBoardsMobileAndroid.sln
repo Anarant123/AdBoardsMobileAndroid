@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdBoardsMobileAndroid", "Ad
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdBoards.ApiClient", "..\AdBoardsWebAPI\AdBoards.ApiClient\AdBoards.ApiClient.csproj", "{2070D4A7-CFF7-4FAC-9D7A-047256266DFC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdBoards.Domain", "..\AdBoardsWebAPI\AdBoards.Domain\AdBoards.Domain.csproj", "{150AD046-9979-4807-A469-BF6EF2E8A384}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Functional", "..\AdBoardsWebAPI\Functional\Functional.csproj", "{492B7F2F-1F6E-472A-8C94-849AACC48952}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +35,14 @@ Global
 		{2070D4A7-CFF7-4FAC-9D7A-047256266DFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2070D4A7-CFF7-4FAC-9D7A-047256266DFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2070D4A7-CFF7-4FAC-9D7A-047256266DFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{150AD046-9979-4807-A469-BF6EF2E8A384}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{150AD046-9979-4807-A469-BF6EF2E8A384}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{150AD046-9979-4807-A469-BF6EF2E8A384}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{150AD046-9979-4807-A469-BF6EF2E8A384}.Release|Any CPU.Build.0 = Release|Any CPU
+		{492B7F2F-1F6E-472A-8C94-849AACC48952}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{492B7F2F-1F6E-472A-8C94-849AACC48952}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{492B7F2F-1F6E-472A-8C94-849AACC48952}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{492B7F2F-1F6E-472A-8C94-849AACC48952}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
